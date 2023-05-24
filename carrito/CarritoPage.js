@@ -6,21 +6,21 @@ const CarritoPage = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 300, height: 100 }}
+        style={{ width: 350, height: 100 }}
         source={require("../assets/carrito.png")}
       />
       <View>
-        <Text style={{ width: 300 }}>
+        <Text style={{ width: 300, fontWeight: "bold" }}>
           Total: {"\u0024"}
           {/* Dinero total aqui */}
           <Text>1000</Text>
         </Text>
-        <Text>
+        <Text style={{ fontWeight: "bold" }}>
           Cantidad de Items:
           {/* Cantidad total de productos aqui */}
           <Text></Text>
         </Text>
-        <Text>Envio Gratis!</Text>
+        <Text style={{ fontWeight: "bold" }}>Envio Gratis!</Text>
       </View>
       <View style={{ flexDirection: "row" }}>
         <View style={{ padding: 7 }}>
@@ -37,6 +37,9 @@ const CarritoPage = () => {
             title="Vaciar carrito"
           />
         </View>
+      </View>
+      <View>
+        {/* <Articulo /> */}
       </View>
     </View>
   );
