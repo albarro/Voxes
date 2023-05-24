@@ -6,11 +6,81 @@ import {
   Image,
   TextInput,
   TouchableHighlight,
-  Linking,
   ImageBackground,
 } from "react-native";
+import { findUserByName, saveUser } from "../database/database";
 
 class RegistroScreen extends Component {
+  state = {
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    error: "",
+  };
+
+  trySubmit() {
+    if (!this.state.email) {
+      this.setState({ error: "Introduce email" });
+      return;
+    }
+
+    if (!this.state.email.includes("@")) {
+      this.setState({
+        error: "Por favor verifique la dirección de mail ingresada",
+      });
+      return;
+    }
+
+    if (!this.state.username) {
+      this.setState({ error: "Introduce nombre de usuario" });
+      return;
+    }
+
+    if (this.state.username.length < 5) {
+      this.setState({
+        error: "El nombre de usuario debe ser mayor a 5 caracteres",
+      });
+      return;
+    }
+
+    if (findUserByName(this.state.username)) {
+      this.setState({ error: "Ya existe un usuario con este nombre" });
+      return;
+    }
+
+    if (!this.state.password) {
+      this.setState({ error: "Introduce contraseña" });
+      return;
+    }
+
+    if (this.state.password.length < 6) {
+      this.setState({ error: "La contraseña debe ser mayor a 6 caracteres" });
+      return;
+    }
+
+    if (!this.state.confirmPassword) {
+      this.setState({ error: "Confirme la contraseña" });
+      return;
+    }
+
+    if (this.state.password !== this.state.confirmPassword) {
+      this.setState({ error: "Las contraseñas no coinciden" });
+      return;
+    }
+
+    saveUser(this.state.email, this.state.username, this.state.password);
+    navigation.navigate("Home");
+  }
+
+  showError() {
+    if (this.state.error) {
+      return <Text style={{ color: "red" }}>{this.state.error}</Text>;
+    } else {
+      return;
+    }
+  }
+
   render() {
     const { navigation } = this.props;
     return (
@@ -36,6 +106,9 @@ class RegistroScreen extends Component {
               placeholderTextColor={"#898b8e"}
               inputMode="email"
               keyboardType="email-address"
+              onChangeText={(email) => {
+                this.setState({ email });
+              }}
             />
           </View>
           <View style={styles.inputView}>
@@ -43,7 +116,13 @@ class RegistroScreen extends Component {
               style={styles.inputIcon}
               source={require("../assets/nuk-icons/png/2x/single-02@2x.png")}
             />
-            <TextInput placeholder="Usuario" placeholderTextColor={"#898b8e"} />
+            <TextInput
+              placeholder="Usuario"
+              placeholderTextColor={"#898b8e"}
+              onChangeText={(username) => {
+                this.setState({ username });
+              }}
+            />
           </View>
           <View style={styles.inputView}>
             <Image
@@ -54,6 +133,9 @@ class RegistroScreen extends Component {
               placeholder="Contraseña"
               placeholderTextColor={"#898b8e"}
               secureTextEntry={true}
+              onChangeText={(password) => {
+                this.setState({ password });
+              }}
             />
           </View>
           <View style={styles.inputView}>
@@ -65,9 +147,15 @@ class RegistroScreen extends Component {
               placeholder="Repite la contraseña"
               placeholderTextColor={"#898b8e"}
               secureTextEntry={true}
+              onChangeText={(confirmPassword) => {
+                this.setState({ confirmPassword });
+              }}
             />
           </View>
-          <TouchableHighlight style={styles.inputSubmit}>
+          <TouchableHighlight
+            style={styles.inputSubmit}
+            onPress={() => this.trySubmit()}
+          >
             <Text style={{ color: "white" }}>Crear Cuenta</Text>
           </TouchableHighlight>
 
@@ -80,6 +168,7 @@ class RegistroScreen extends Component {
               Inicia Sesión
             </Text>
           </View>
+          {this.showError()}
         </View>
       </View>
     );

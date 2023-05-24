@@ -6,11 +6,53 @@ import {
   Image,
   TextInput,
   TouchableHighlight,
-  Linking,
   ImageBackground,
 } from "react-native";
+import { findUserByName } from "../database/database";
 
 class LoginScreen extends Component {
+  state = {
+    username: "",
+    password: "",
+    error: "",
+  };
+
+  tryLogin() {
+    if(!this.state.username){
+      this.setState({ error: "Introduce nombre de usuario"});
+      return;
+    }
+
+    if(!this.state.password){
+      this.setState({ error: "Introduce contraseña"});
+      return;
+    }
+
+    let user = findUserByName(this.state.username);
+
+    if (!user) {
+      this.setState({ error: "Usuario o contraseña incorrectos"});
+      return;
+    }
+
+    if (user.password !== this.state.password) {
+      this.setState({ error: "Usuario o contraseña incorrectos"});
+      return;
+    }
+
+    navigation.navigate("Home");
+  }
+
+  showError(){
+    if(this.state.error){
+      return(
+        <Text style={{color: "red"}}>{this.state.error}</Text>
+      )
+    }else{
+      return
+    }
+  }
+
   render() {
     const { navigation } = this.props;
     return (
@@ -31,7 +73,13 @@ class LoginScreen extends Component {
               style={styles.inputIcon}
               source={require("../assets/nuk-icons/png/2x/single-02@2x.png")}
             />
-            <TextInput placeholder="Usuario" placeholderTextColor={"#898b8e"} />
+            <TextInput
+              placeholder="Usuario"
+              placeholderTextColor={"#898b8e"}
+              onChangeText={(username) => {
+                this.setState({ username });
+              }}
+            />
           </View>
           <View style={styles.inputView}>
             <Image
@@ -42,9 +90,15 @@ class LoginScreen extends Component {
               placeholder="Contraseña"
               placeholderTextColor={"#898b8e"}
               secureTextEntry={true}
+              onChangeText={(password) => {
+                this.setState({ password });
+              }}
             />
           </View>
-          <TouchableHighlight style={styles.inputSubmit}>
+          <TouchableHighlight
+            style={styles.inputSubmit}
+            onPress={() => this.tryLogin()}
+          >
             <Text style={{ color: "white" }}>Iniciar Sesión</Text>
           </TouchableHighlight>
 
@@ -57,6 +111,7 @@ class LoginScreen extends Component {
               Regístrate
             </Text>
           </View>
+          {this.showError()}
         </View>
       </View>
     );
