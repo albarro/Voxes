@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textTitle: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: "bold",
     marginBottom: 10,
     color: "#f0fff0",
@@ -70,24 +70,28 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   centeredText: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 20,
     color: "white",
   },
   buttonContainer: {
     marginTop: 20,
+    width: '75%',
   },
   button: {
     backgroundColor: "#2f4f4f",
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderRadius: 5,
+    height:40,
+    borderRadius: 20,
     marginBottom:10,
+    width: '100%',
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    textAlign: 'center',
   },
   backgroundImage: {
     flex: 1,

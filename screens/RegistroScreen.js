@@ -5,7 +5,7 @@ class RegistroScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textTitle}>RegistroScreen</Text>
+        <Text style={styles.textTitle}></Text>
       </View>
     );
   }
