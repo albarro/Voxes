@@ -12,13 +12,8 @@ import { NavigationContainer } from "@react-navigation/native";
 
 
 class HomeScreen extends Component {
- 
-
-
   render() {
     const { navigation } = this.props;
-
-
     
 
 
