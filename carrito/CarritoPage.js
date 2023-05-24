@@ -6,11 +6,11 @@ const CarritoPage = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 300, height: 300, marginLeft: 15 }}
+        style={{ width: 300, height: 100 }}
         source={require("../assets/carrito.png")}
       />
       <View>
-        <Text>
+        <Text style={{ width: 300 }}>
           Total: {"\u0024"}
           {/* Dinero total aqui */}
           <Text>1000</Text>
@@ -22,9 +22,21 @@ const CarritoPage = () => {
         </Text>
         <Text>Envio Gratis!</Text>
       </View>
-      <View>
-        <Button title="Comprar" />
-        <Button title="Vaciar carrito" />
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ padding: 7 }}>
+          <Button
+            style={{ marginRight: 15 }}
+            color="lightgreen"
+            title="Comprar"
+          />
+        </View>
+        <View style={{ padding: 7 }}>
+          <Button
+            style={{ marginLeft: 15 }}
+            color="red"
+            title="Vaciar carrito"
+          />
+        </View>
       </View>
     </View>
   );
