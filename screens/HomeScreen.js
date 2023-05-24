@@ -9,9 +9,19 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
+
+
 class HomeScreen extends Component {
+ 
+
+
   render() {
     const { navigation } = this.props;
+
+
+    
+
+
     return (
       <ImageBackground
         source={require("../assets/imgs/bg.png")}
@@ -68,10 +78,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: "#778899",
+    backgroundColor: "#2f4f4f",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
+    marginBottom:10,
   },
   buttonText: {
     color: "white",
