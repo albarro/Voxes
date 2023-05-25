@@ -44,11 +44,6 @@ class RegistroScreen extends Component {
       return;
     }
 
-    if (findUserByName(this.state.username)) {
-      this.setState({ error: "Ya existe un usuario con este nombre" });
-      return;
-    }
-
     if (!this.state.password) {
       this.setState({ error: "Introduce contraseña" });
       return;
@@ -69,8 +64,20 @@ class RegistroScreen extends Component {
       return;
     }
 
-    saveUser(this.state.email, this.state.username, this.state.password);
-    navigation.navigate("Home");
+    //Si todo es correcto buscamos en la db por posibles duplicaciones
+
+    findUserByName(this.state.username).then(
+      //Cuando acabe de buscar continuamos
+      (usuario) => {
+        if (usuario) {
+          //Hay duplicación, marco error y salgo
+          this.setState({ error: "Ya existe un usuario con este nombre" });
+          return;
+        } //No la hay, guardo el usuario
+        saveUser(this.state.email, this.state.username, this.state.password);
+        //navigation.navigate("Home");
+      }
+    );
   }
 
   showError() {

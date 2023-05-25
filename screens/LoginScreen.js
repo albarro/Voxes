@@ -18,38 +18,39 @@ class LoginScreen extends Component {
   };
 
   tryLogin() {
-    if(!this.state.username){
-      this.setState({ error: "Introduce nombre de usuario"});
+    if (!this.state.username) {
+      this.setState({ error: "Introduce nombre de usuario" });
       return;
     }
 
-    if(!this.state.password){
-      this.setState({ error: "Introduce contraseña"});
+    if (!this.state.password) {
+      this.setState({ error: "Introduce contraseña" });
       return;
     }
 
-    let user = findUserByName(this.state.username);
+    findUserByName(this.state.username).then(
+      //Busco al usuario en db
+      (user) => {//Acabamos la búsqueda y continuamos
+        if (!user) {
+          this.setState({ error: "Usuario o contraseña incorrectos" });
+          return;
+        }
 
-    if (!user) {
-      this.setState({ error: "Usuario o contraseña incorrectos"});
-      return;
-    }
+        if (user.password !== this.state.password) {
+          this.setState({ error: "Usuario o contraseña incorrectos" });
+          return;
+        }
 
-    if (user.password !== this.state.password) {
-      this.setState({ error: "Usuario o contraseña incorrectos"});
-      return;
-    }
-
-    navigation.navigate("Home");
+        navigation.navigate("Home");
+      }
+    );
   }
 
-  showError(){
-    if(this.state.error){
-      return(
-        <Text style={{color: "red"}}>{this.state.error}</Text>
-      )
-    }else{
-      return
+  showError() {
+    if (this.state.error) {
+      return <Text style={{ color: "red" }}>{this.state.error}</Text>;
+    } else {
+      return;
     }
   }
 

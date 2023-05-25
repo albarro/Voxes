@@ -1,27 +1,32 @@
+import { addDoc, getDocs, collection, query, where } from "@firebase/firestore";
+import { firestore } from "./firebase";
 
-let usuarios = [
-    {
-    id: 0,
-    email: "Dummy@gmail.com",
-    username: "Dummy123",
-    password: "123Dummy321"
-    }
-];
+const collectionName = "usersVoxes";
 
+export async function findUserByName(username) {
+  const q = query(collection(firestore, collectionName), where("username", "==", username))
+  const queryRe = await getDocs(q);
 
-export function findUserByName(username){
-    console.log(usuarios);
-    return usuarios.find(user => user.username == username);
+  let user;
+  queryRe.forEach((doc) => {
+    user = doc.data();
+  });
+  return user;
 }
 
-export function saveUser(email, username, password){
-    let user ={
-        id: usuarios.length,
-        email: email,
-        username: username,
-        password: password,
-    }
+export async function saveUser(email, username, password) {
+  let user = {
+    email: email,
+    username: username,
+    password: password,
+  };
 
-    usuarios.push(user);
-    console.log(usuarios);
+  const ref = collection(firestore, collectionName);
+  try {
+    const userRef = await addDoc(ref, user);
+    alert('Guardado con ID:' + userRef.id);
+  } catch (err) {
+    console.log(err);
+  }
 }
+
