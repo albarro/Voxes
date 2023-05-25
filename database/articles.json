@@ -1,0 +1,82 @@
+[
+    {
+      id: 1,
+      nombre: "Guitarra",
+      precio: 130,
+      categoria: "cuerda",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 2,
+      nombre: "Flauta",
+      precio: 250,
+      categoria: "viento",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 3,
+      nombre: "Violín",
+      precio: 400,
+      categoria: "cuerda",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 4,
+      nombre: "Trompeta",
+      precio: 300,
+      categoria: "viento",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 5,
+      nombre: "Trombón",
+      precio: 350,
+      categoria: "viento",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 6,
+      nombre: "Tuba",
+      precio: 230,
+      categoria: "viento",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 7,
+      nombre: "Platos",
+      precio: 100,
+      categoria: "percusion",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 8,
+      nombre: "Tambor",
+      precio: 94,
+      categoria: "percusion",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 9,
+      nombre: "Carrillón de láminas",
+      precio: 550,
+      categoria: "percusion",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    },
+    {
+      id: 10,
+      nombre: "Piano",
+      precio: 1250,
+      categoria: "cuerda",
+      descripcion: "",
+      imagen: "../assets/imgs/"
+    }
+  ]

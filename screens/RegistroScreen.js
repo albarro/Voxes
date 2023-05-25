@@ -17,6 +17,7 @@ class RegistroScreen extends Component {
     password: "",
     confirmPassword: "",
     error: "",
+    navigation: this.props.navigation,
   };
 
   trySubmit() {
@@ -75,7 +76,7 @@ class RegistroScreen extends Component {
           return;
         } //No la hay, guardo el usuario
         saveUser(this.state.email, this.state.username, this.state.password);
-        //navigation.navigate("Home");
+        this.state.navigation.navigate("Articles");
       }
     );
   }
@@ -170,7 +171,7 @@ class RegistroScreen extends Component {
             <Text>¿Ya tienes cuenta?</Text>
             <Text
               style={{ color: "blue", textDecorationLine: "underline" }}
-              onPress={() => navigation.navigate("Login")}
+              onPress={() => this.state.navigation.navigate("Login")}
             >
               Inicia Sesión
             </Text>
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 120 / 2,
-    backgroundColor: "#444c6d",
+    backgroundColor: "#2f4f4f",
 
     alignItems: "center",
     justifyContent: "center",
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
 
     width: "80%",
 
-    backgroundColor: "#444c6d",
+    backgroundColor: "#2f4f4f",
 
     alignItems: "center",
   },

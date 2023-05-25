@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableHighlight,
   ImageBackground,
+  SafeAreaView
 } from "react-native";
 import { findUserByName } from "../database/database";
 
@@ -15,6 +16,7 @@ class LoginScreen extends Component {
     username: "",
     password: "",
     error: "",
+    navigation: this.props.navigation,
   };
 
   tryLogin() {
@@ -22,7 +24,6 @@ class LoginScreen extends Component {
       this.setState({ error: "Introduce nombre de usuario" });
       return;
     }
-
     if (!this.state.password) {
       this.setState({ error: "Introduce contraseña" });
       return;
@@ -30,7 +31,8 @@ class LoginScreen extends Component {
 
     findUserByName(this.state.username).then(
       //Busco al usuario en db
-      (user) => {//Acabamos la búsqueda y continuamos
+      (user) => {
+        //Acabamos la búsqueda y continuamos
         if (!user) {
           this.setState({ error: "Usuario o contraseña incorrectos" });
           return;
@@ -41,7 +43,7 @@ class LoginScreen extends Component {
           return;
         }
 
-        navigation.navigate("Home");
+        this.state.navigation.navigate("Articles");
       }
     );
   }
@@ -55,13 +57,12 @@ class LoginScreen extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.headerView}>
           <ImageBackground
             style={{ height: "100%", width: "100%" }}
-            source={require("../assets/header.jpg")}
+            source={require("../assets/imgs/header.jpg")}
           >
             <View style={styles.headerContainer}>
               <Text style={styles.header}>Login</Text>
@@ -107,14 +108,14 @@ class LoginScreen extends Component {
             <Text>¿Todavía no tienes cuenta?</Text>
             <Text
               style={{ color: "blue", textDecorationLine: "underline" }}
-              onPress={() => navigation.navigate("Registro")}
+              onPress={() => this.state.navigation.navigate("Registro")}
             >
               Regístrate
             </Text>
           </View>
           {this.showError()}
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -127,9 +128,7 @@ const styles = StyleSheet.create({
   },
   form: {
     paddingVertical: "20%",
-
     width: "100%",
-
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 120 / 2,
-    backgroundColor: "#444c6d",
+    backgroundColor: "#2f4f4f",
 
     alignItems: "center",
     justifyContent: "center",
@@ -157,6 +156,10 @@ const styles = StyleSheet.create({
   header: {
     color: "white",
     fontSize: 20,
+  },
+  buttonContainer: {
+    marginTop: 20,
+    width: "75%",
   },
   inputView: {
     marginVertical: 10,
@@ -177,11 +180,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 10,
     borderRadius: 100 / 2,
-
     width: "80%",
-
-    backgroundColor: "#444c6d",
-
+    backgroundColor: "#2f4f4f",
     alignItems: "center",
   },
   inputIcon: {
@@ -189,6 +189,21 @@ const styles = StyleSheet.create({
     width: 25,
 
     marginHorizontal: 9,
+  },
+  button: {
+    backgroundColor: "#2f4f4f",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    height: 40,
+    borderRadius: 20,
+    marginBottom: 10,
+    width: "100%",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 
