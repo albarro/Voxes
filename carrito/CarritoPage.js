@@ -1,6 +1,7 @@
 import CarritoIcon from "./CarritoIcon";
 import { View, Text, Image, Button } from "react-native";
 import styles from "../styles";
+import Articulos from "../Articulos";
 
 const CarritoPage = () => {
   return (
@@ -28,7 +29,7 @@ const CarritoPage = () => {
         </View>
         <View style={{ padding: 7 }}>
           <Button
-            style={{ marginLeft: 15, marginBottom:15 }}
+            style={{ marginLeft: 15, marginBottom: 15 }}
             color="#b52b2b"
             title="Vaciar carrito"
           />
@@ -41,7 +42,7 @@ const CarritoPage = () => {
           width: 300,
         }}
       />
-      <View>{/* Los articulos van aquí */}</View>
+      <View>{Articulos.id}</View>
     </View>
   );
 };
