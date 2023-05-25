@@ -7,17 +7,18 @@ import {
   SafeAreaView,
   Image,
 } from "react-native";
+import articlesData from '../database/articles.json';
 
 class ArticlesScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedCategory: null, articles: [], cart: [] };
+    this.state = { selectedCategory: null, articles: articlesData, cart: [] };// Asigna los datos del archivo articles.json al estado
   }
   //Metodo para seleccionar la categoria
   selectCategory(category) {
     this.setState({ selectedCategory: category });
   }
-  
+
   render() {
 
     const { selectedCategory, articles } = this.state;
@@ -34,25 +35,32 @@ class ArticlesScreen extends Component {
     };
     return (
       <SafeAreaView style={styles.container}>
+       
+        <View style={styles.imageContainer}>
+        <Image
+          source={require('../assets/imgs/bg5.png')}
+          style={styles.image}
+        />
+        </View>
         <Text style={styles.textTitle}>Articulos</Text>
         <View style={styles.categoryButtonsContainer}>
           <TouchableOpacity
             style={styles.categoryButton}
-            onPress={() => this.selectCategory("Category1")}
+            onPress={() => this.selectCategory("cuerda")}
           >
-            <Text style={styles.categoryButtonText}>Categoria 1</Text>
+            <Text style={styles.categoryButtonText}>Cuerda</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.categoryButton}
-            onPress={() => this.selectCategory("Category2")}
+            onPress={() => this.selectCategory("viento")}
           >
-            <Text style={styles.categoryButtonText}>Categoria 2</Text>
+            <Text style={styles.categoryButtonText}>Viento</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.categoryButton}
-            onPress={() => this.selectCategory("Category3")}
+            onPress={() => this.selectCategory("percusion")}
           >
-            <Text style={styles.categoryButtonText}>Categoria 3</Text>
+            <Text style={styles.categoryButtonText}>Percusion</Text>
           </TouchableOpacity>
         </View>
         {selectedCategory && (
@@ -89,8 +97,9 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 26,
     fontWeight: "bold",
+    marginTop:40,
     marginBottom: 10,
-    color: "#2f4f4f",
+    color: "#fff",
   },
   categoryButtonsContainer: {
     marginTop: 20,
@@ -117,6 +126,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  imageContainer: {
+    height: 50, // Ajusta la altura deseada
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 200,
+  },
+  image: {
+    width: 320,
+    height: 320,
+    resizeMode: 'cover',
+    opacity:0.7,
+  },
+
 });
 
 export default ArticlesScreen;
