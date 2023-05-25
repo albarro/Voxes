@@ -2,8 +2,12 @@ import CarritoIcon from "./CarritoIcon";
 import { View, Text, Image, Button } from "react-native";
 import styles from "../styles";
 import Articulos from "../Articulos";
+import { QuantityPicker } from "react-qty-picker";
 
 const CarritoPage = () => {
+  const articulo1 = Articulos.filter((articulo1) => articulo1.id === 1);
+  const articulo2 = Articulos.filter((articulo2) => articulo2.id === 10);
+
   return (
     <View style={styles.container}>
       <Image
@@ -13,15 +17,16 @@ const CarritoPage = () => {
       <View>
         <Text style={{ width: 300, fontWeight: "bold", alignText: "center" }}>
           Total: {"\u0024"}
-          {/* Dinero total aqui */}
-          <Text>1000</Text>
+          <Text> {articulo1[0].precio + articulo2[0].precio}</Text>
         </Text>
         <Text style={{ fontWeight: "bold" }}>
           Cantidad de Items:
           {/* Cantidad total de productos aqui */}
           <Text></Text>
         </Text>
-        <Text style={{ fontWeight: "bold" }}>Envio Gratis!</Text>
+        <Text style={{ fontWeight: "bold", alignText: "center" }}>
+          Envio Gratis!
+        </Text>
       </View>
       <View style={{ flexDirection: "row" }}>
         <View style={{ padding: 7 }}>
@@ -42,7 +47,54 @@ const CarritoPage = () => {
           width: 300,
         }}
       />
-      <View>{Articulos.id}</View>
+      <View style={{ flexDirection: "row", marginRight: 100 }}>
+        <View style={{ padding: 5 }}>
+          <Image
+            source={articulo1[0].imagen}
+            style={{ width: 50, height: 50, alignItems: "left" }}
+          />
+        </View>
+        <View style={{ padding: 5 }}>
+          <Text>{articulo1[0].nombre}</Text>
+          <Text>{articulo1[0].categoria}</Text>
+          <Text>
+            <Text>{"\u0024"}</Text>
+            {articulo1[0].precio}
+          </Text>
+        </View>
+        <View style={{ padding: 5 }}>
+          <QuantityPicker
+            value={1}
+            minValue={1}
+            maxValue={10}
+            onValueChange={(value) => console.log("Selected value:", value)}
+          />
+        </View>
+      </View>
+      <View style={{ flexDirection: "row", marginRight: 100 }}>
+        <View style={{ padding: 5 }}>
+          <Image
+            source={articulo2[0].imagen}
+            style={{ width: 50, height: 50, alignItems: "left" }}
+          />
+        </View>
+        <View style={{ padding: 5 }}>
+          <Text>{articulo2[0].nombre}</Text>
+          <Text>{articulo2[0].categoria}</Text>
+          <Text>
+            <Text>{"\u0024"}</Text>
+            {articulo2[0].precio}
+          </Text>
+        </View>
+        <View style={{ padding: 5 }}>
+          <QuantityPicker
+            value={1}
+            minValue={1}
+            maxValue={10}
+            onValueChange={(value) => console.log("Selected value:", value)}
+          />
+        </View>
+      </View>
     </View>
   );
 };

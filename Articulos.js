@@ -5,7 +5,7 @@ const Articulos = [
     precio: 130,
     categoria: "cuerda",
     descripcion: "",
-    imagen: require("./"),
+    imagen: require("./assets/guitarra.jpg"),
   },
   {
     id: 2,
@@ -77,7 +77,7 @@ const Articulos = [
     precio: 1250,
     categoria: "cuerda",
     descripcion: "",
-    imagen: require("./"),
+    imagen: require("./assets/piano.jpg"),
   },
 ];
 export default Articulos;
